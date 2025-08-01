@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrackMyBus - Driver Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #cdf1f5, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: white;
+      padding: 2.5rem 3rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box h2 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      color: #00796b;
+      text-align: center;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #3b7a6d;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #2e5e54;
+    }
+
+    .note {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+    }
+
+    .note strong {
+      color: #d84315;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Driver Login</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="login">Login</button>
+    <button id="signup">Sign Up</button>
+    <p class="note"><strong>Note:</strong> This login is <strong>for drivers only</strong>.</p>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

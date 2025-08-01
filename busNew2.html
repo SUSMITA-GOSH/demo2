@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrackMyBus - Choose a Bus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f2f2f2;
+      padding: 1rem;
+    }
+    header {
+      background-color: #3b7a6d;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .bus-list {
+      margin-top: 2rem;
+    }
+    .bus-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .bus-name {
+      font-weight: 600;
+    }
+    .track-btn {
+      background-color: #00796b;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .track-btn:hover {
+      background-color: #004d40;
+    }
+    #statusMsg {
+      margin-top: 1rem;
+      color: #2e7d32;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>TrackMyBus - Live Bus Tracking</header>
+
+  <div class="container">
+    <button id="startTrackingBtn">Start Tracking (Share Your Location)</button>
+    <p id="statusMsg"></p>
+
+    <div class="bus-list" id="busList"></div>
+  </div>
+
+  <script>
+    const buses = [
+      { id: "bus1", name: "Bus 1 - Tilagor" },
+      { id: "bus2", name: "Bus 2 - Naiyorpool" },
+      { id: "bus3", name: "Bus 3 - Eidgah" },
+      { id: "bus4", name: "Bus 4 - Lakkatura" },
+      { id: "bus5", name: "Bus 5 - Chowhatta" },
+    ];
+
+    let userLat = null;
+    let userLon = null;
+
+    const statusMsg = document.getElementById('statusMsg');
+    const startTrackingBtn = document.getElementById('startTrackingBtn');
+    const busListDiv = document.getElementById('busList');
+
+    startTrackingBtn.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      statusMsg.textContent = "Getting your location...";
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          userLat = position.coords.latitude;
+          userLon = position.coords.longitude;
+          statusMsg.textContent = "Location shared! Now you can track buses below.";
+          renderBusList();
+          startTrackingBtn.disabled = true;
+          startTrackingBtn.style.backgroundColor = '#6c757d'; // disable look
+          startTrackingBtn.style.cursor = 'not-allowed';
+        },
+        (error) => {
+          alert("Could not get your location: " + error.message);
+          statusMsg.textContent = "";
+        }
+      );
+    });
+
+    function renderBusList() {
+      busListDiv.innerHTML = "";
+      buses.forEach(bus => {
+        const card = document.createElement('div');
+        card.className = 'bus-card';
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'bus-name';
+        nameDiv.textContent = bus.name;
+
+        const trackBtn = document.createElement('button');
+        trackBtn.className = 'track-btn';
+        trackBtn.textContent = 'Track';
+
+        trackBtn.onclick = () => {
+          if (userLat === null || userLon === null) {
+            alert("Please click 'Start Tracking' to share your location first.");
+            return;
+          }
+          // Open the tracking page with URL params
+          const url = `track.html?busId=${encodeURIComponent(bus.id)}&busName=${encodeURIComponent(bus.name)}&userLat=${userLat}&userLon=${userLon}`;
+          window.open(url, "_blank");
+        };
+
+        card.appendChild(nameDiv);
+        card.appendChild(trackBtn);
+        busListDiv.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

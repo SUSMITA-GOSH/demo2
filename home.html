@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrackMyBus - Driver Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right,#cdf1f5, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 2.5rem 3rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    label {
+      font-size: 1rem;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #3b7a6d;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2e5e54;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to TrackMyBus</h1>
+    <p>You are now logged in!</p>
+
+    <label for="busSelect"><strong>Select your bus:</strong></label>
+    <select id="busSelect">
+      <option value="">-- Select a Bus --</option>
+      <option value="bus1">Bus 1 - Tilagor</option>
+      <option value="bus2">Bus 2 - Naiyorpool</option>
+      <option value="bus3">Bus 3 - Eidgah</option>
+      <option value="bus4">Bus 4 - Lakkatura</option>
+      <option value="bus5">Bus 5 - Chowhatta</option>
+    </select>
+
+    <button id="shareLocation">Start Sharing Location</button>
+  </div>
+
+  <script type="module" src="driver.js"></script>
+</body>
+</html>
